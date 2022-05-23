@@ -1,9 +1,9 @@
-var BALLOON_RADIUS = 20;
+BALLOON_RADIUS = 20;
 var BALLOON_COLORS;
 
 var CREATE_DELAY = 400;
 var FLOAT_DELAY = 15;
-var FLOAT_SPEED = -2;
+var FLOAT_SPEED = -1.5;
 
 var winScore;
 var color;
@@ -26,6 +26,7 @@ function updateQuestion() {
     var x = Randomizer.nextInt(3, 10);
     var y = Randomizer.nextInt(3, 10);
     answer = x * y;
+  
     questionText.setText("What is " + x + "x" + y + "?");
 }
 
@@ -40,13 +41,13 @@ function addQuestion() {
 }
 
 function start() {
-    BALLOON_COLORS = [ Color.RED, Color.GREEN, Color.BLUE, Color.YELLOW];
+    BALLOON_COLORS = [ Color.RED, Color.GREEN, Color.CYAN, Color.YELLOW];
     titleScreen();
     startButton =  new Rectangle(50, 60);
     scoreText = new Text("Score: " + score, "14pt Courier")
     winScore = Randomizer.nextInt(50, 150);
     goalText = new Text("Goal: " + winScore, "14pt Courier")
- winScore = Randomizer.nextInt 
+
 
 }
 
@@ -95,7 +96,6 @@ function titleScreen(){
     makeText("How to Play:", "18pt Monospace", getWidth() / 2, 160);
     makeText("Hover over the balloons with your", "14pt Monospace", getWidth() / 2, 175 - 80);
     makeText("curser to answer the questions. ", "14pt Monospace", getWidth() / 2, 205 - 80);
-    makeText("d.", "14pt Monospace", getWidth() / 2, 205 - 80);
     makeText("Yellow ballons speed up the", "14pt Monospace", getWidth() / 2, 255 - 80);
     makeText("game, and blue ones slow it down. ", "14pt Monospace", getWidth() / 2, 240 - 80);
       makeText("Red ballons makes you lose points.", "14pt Monospace", getWidth() / 2, 265 - 80);
@@ -178,7 +178,7 @@ function startGame(){
     setTimer(float, FLOAT_DELAY);
    
     mouseMoveMethod(eventHandler);
-    
+
 }
 
 function makeText(text, font, xPos, yPos){
@@ -192,7 +192,7 @@ function makeText(text, font, xPos, yPos){
 function createBalloon(){
     // create a balloon on a temp variable so we can add it later
     var balloonTemp = new Circle(BALLOON_RADIUS);
-    var number = new Text(Randomizer.nextInt(answer - 5,  answer + 5), "14pt Courier");
+    var number = new Text(Randomizer.nextInt(answer - 2,  answer + 2), "14pt Courier");
     // making the percentage of red balls go up
     // using variables to make sure it hasn't been done for this score
     if(alreadyDone == false){
@@ -253,7 +253,6 @@ function popBalloon(balloon){
     var numberText = numbers[balloonIndex];
     console.log(numberText.getText());
     var number = parseInt(numberText.getText())
-
     console.log(number)
     if(number == answer) {
         score += number;
@@ -271,7 +270,7 @@ function popBalloon(balloon){
         // update score
         scoreText.setText("Score: " + score);
         alreadyDone = false;
-    }else if(balloon.color == Color.blue){
+    }else if(balloon.color == Color.cyan){
         // if its blue make the float speed slower
         scoreText.setText("Score: " + score);
         alreadyDone = false;
@@ -304,7 +303,7 @@ function popBalloon(balloon){
     if(score == winScore){
         winGame();
     }
-}
+} 
 
- 
+
 
